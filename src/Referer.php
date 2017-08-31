@@ -17,7 +17,7 @@ class Referer
     /** @var \Illuminate\Contracts\Session\Session */
     protected $session;
 
-    public function __construct(string $sessionKey, array $sources, Session $session)
+    public function __construct(string $sessionKey, array $sources,Request $request)
     {
         if (empty($sessionKey)) {
             throw InvalidConfiguration::emptySessionKey();
@@ -25,7 +25,7 @@ class Referer
 
         $this->sessionKey = $sessionKey;
         $this->sources = $sources;
-        $this->session = $session;
+        $this->session = $request->session();
     }
 
     public function get(): string
